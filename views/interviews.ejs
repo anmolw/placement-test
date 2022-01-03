@@ -1,0 +1,13 @@
+<h1>Interviews</h1>
+<!-- Form for creating a new interview -->
+<form action="/interviews/create" method="post" class="row mb-4">
+    <div class="col-4 col-lg-2">
+        <label for="company-name-field" class="form-label">Company</label>
+        <input type="text" name="company" id="company-name-field" class="form-control" placeholder="Company" required>
+    </div>
+    <div class="col-4 col-lg-2">
+        <label for="interview-date-field" class="form-label">Date</label>
+        <input type="date" name="date" id="interview-date-field" class="form-control" required>
+    </div>
+    <div class="mt-2 mt-lg-0 col align-self-end"><button type="submit" class="btn btn-primary">Create</button></div>
+</form>

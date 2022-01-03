@@ -1,0 +1,62 @@
+<h1>Students</h1>
+<!-- Form for creating a new student -->
+<form action="/students/create" method="post" class="row mb-4">
+    <div class="col-4 col-lg-2">
+        <label for="student-name-field" class="form-label">Name</label>
+        <input type="text" name="name" id="student-name-field" class="form-control" placeholder="Name" required>
+    </div>
+    <div class="col-4 col-lg-2">
+        <label for="student-college-field" class="form-label">College</label>
+        <input type="text" name="college" id="student-college-field" class="form-control" placeholder="College"
+            required>
+    </div>
+    <div class="col-4 col-lg-2">
+        <label for="student-batch-field" class="form-label">Batch</label>
+        <input type="month" name="batch" id="student-batch-field" class="form-control" min="2020-01" required>
+    </div>
+    <div class="col-4 col-lg-1">
+        <label for="student-dsa-field" class="form-label">DSA</label>
+        <input type="number" min="0" max="100" name="dsa" id="student-dsa-field" class="form-control" placeholder="100"
+            required>
+    </div>
+    <div class="col-4 col-lg-1">
+        <label for="student-webd-field" class="form-label">WebD</label>
+        <input type="number" min="0" max="100" name="webd" id="student-webd-field" class="form-control"
+            placeholder="100" required>
+    </div>
+    <div class="col-4 col-lg-1">
+        <label for="student-react-field" class="form-label">React</label>
+        <input type="number" min="0" max="100" name="react" id="student-react-field" class="form-control"
+            placeholder="100" required>
+    </div>
+    <div class="mt-2 mt-lg-0 col align-self-end"><button type="submit" class="btn btn-primary">Create</button></div>
+</form>
+<!-- List of students -->
+<div id="student-list" class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>College</th>
+                <th>Batch</th>
+                <th>DSA</th>
+                <th>WebD</th>
+                <th>React</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (student of locals.students) { %>
+            <tr>
+                <td><%= student.name %></td>
+                <td><%= student.college %></td>
+                <td><%= student.batch %></td>
+                <td><%= student.scores.dsa %></td>
+                <td><%= student.scores.webd %></td>
+                <td><%= student.scores.react %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<script src="/js/students.js"></script>

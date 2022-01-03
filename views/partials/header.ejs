@@ -1,0 +1,21 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand bg-primary navbar-dark mb-3 mb-lg-4">
+    <div class="container-xxl">
+        <a class="navbar-brand" href="/">Placements</a>
+        <% // Only show navbar links if the user is logged in %>
+        <% if (locals.user) { %>
+        <ul class="navbar-nav me-auto">
+            <% // Conditionally apply an active class to nav links based on the page title %>
+            <li class="nav-item"><a href="/students"
+                    class="nav-link <%= (locals.title === 'Students') ? 'active' : ''%>" % />Students</a></li>
+            <li class=" nav-item"><a href="/interviews"
+                    class="nav-link <%= (locals.title === 'Interviews') ? 'active' : ''%>">Interviews</a></li>
+            <li class=" nav-item"><a href="/results"
+                    class="nav-link <%= (locals.title === 'Results') ? 'active' : ''%>">Results</a></li>
+        </ul>
+        <span class=" text-white"><%= locals.user.name %></span>
+        <a href="/export/csv" class="btn btn-primary">Export</a>
+        <a href="/employees/logout" class="btn btn-primary">Logout</a>
+        <% } %>
+    </div>
+</nav>
