@@ -5,14 +5,23 @@ const interviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         required: true
     },
-    students: {
+    results: {
         type: [mongoose.SchemaTypes.ObjectId],
-        ref: "Student"
+        ref: "Result"
     }
+
+});
+
+interviewSchema.virtual("friendlyDate", function () {
+
 });
 
 const interviewModel = mongoose.model("Interview", interviewSchema);

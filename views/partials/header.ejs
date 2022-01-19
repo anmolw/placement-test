@@ -9,11 +9,11 @@
             <li class="nav-item"><a href="/students"
                     class="nav-link <%= (locals.title === 'Students') ? 'active' : ''%>" % />Students</a></li>
             <li class=" nav-item"><a href="/interviews"
-                    class="nav-link <%= (locals.title === 'Interviews') ? 'active' : ''%>">Interviews</a></li>
-            <li class=" nav-item"><a href="/results"
-                    class="nav-link <%= (locals.title === 'Results') ? 'active' : ''%>">Results</a></li>
+                    class="nav-link <%= (locals.title.startsWith('Interview')) ? 'active' : ''%>">Interviews</a></li>
+            <li class=" nav-item"><a href="/jobs"
+                    class="nav-link <%= (locals.title === 'Jobs') ? 'active' : ''%>">Jobs</a></li>
         </ul>
-        <span class=" text-white"><%= locals.user.name %></span>
+        <span class="text-white p-2"><%= locals.user.name %></span>
         <a href="/export/csv" class="btn btn-primary">Export</a>
         <a href="/employees/logout" class="btn btn-primary">Logout</a>
         <% } %>

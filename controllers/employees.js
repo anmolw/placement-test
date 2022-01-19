@@ -36,12 +36,19 @@ exports.registerPage = (req, res) => {
     });
 }
 
-// exports.login = (req, res) => {
-//     res.render("students", { title: "Students" });
-// }
+exports.createSession = (req, res) => {
+    if (!req.user) {
+        req.flash("error", "Invalid username/password");
+    }
+    else {
+        req.flash("success", "Logged in succesfully");
+    }
+    res.redirect("/");
+}
 
 // Route handler 
 exports.logout = (req, res) => {
     req.logout();
-    res.redirect('/');
+    req.flash("success", "Logged out successfully");
+    res.redirect('/employees/login');
 }

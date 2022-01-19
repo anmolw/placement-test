@@ -1,5 +1,7 @@
 // Imports
 const express = require("express");
+const flash = require('connect-flash');
+const setFlash = require('./middleware/flash').setFlash;
 const ejsLayouts = require("express-ejs-layouts");
 const path = require('path');
 const passport = require("passport");
@@ -33,6 +35,7 @@ app.use(ejsLayouts);
 // Serve static files from the assets folder
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Create a session store for login sessions
 app.use(session({
@@ -48,6 +51,10 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+
+// Register flash middleware
+app.use(flash());
+app.use(setFlash);
 
 // Initialize passport & register as middleware
 app.use(passport.initialize());

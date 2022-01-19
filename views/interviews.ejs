@@ -9,5 +9,27 @@
         <label for="interview-date-field" class="form-label">Date</label>
         <input type="date" name="date" id="interview-date-field" class="form-control" required>
     </div>
+    <div class="col-4 col-lg-2">
+        <label for="interview-role-field" class="form-label">Role</label>
+        <input type="text" name="role" id="interview-role-field" class="form-control" required>
+    </div>
     <div class="mt-2 mt-lg-0 col align-self-end"><button type="submit" class="btn btn-primary">Create</button></div>
 </form>
+<!-- List of all interviews -->
+<div class="row row-cols-1 row-cols-md-4" id="interview-list">
+    <% for (interview of interviews) { %>
+    <div class="col col-md-3 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h4><%= interview.company %></h4>
+                <div>Role: <%= interview.role %></div>
+                <div><%= interview.date %></div>
+            </div>
+            <div class="card-footer">
+                <a href="<%= `/interviews/${interview.id}/results` %>" class="btn btn-primary">Results</a>
+                <a href="/interviews/<%= interview.id %>/delete" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

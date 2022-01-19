@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const resultsSchema = new mongoose.Schema({
     student: {
-        type: mongoose.SchemaTypes.ObjectId,
+        type: Number,
         ref: "Student",
         required: true
     },
@@ -12,7 +12,9 @@ const resultsSchema = new mongoose.Schema({
         required: true
     },
     result: {
-        type: ["Pass", "Fail", "On hold", "Not attempted"],
+        type: String,
+        enum: ["Pass", "Fail", "On hold", "Didn't attempt", "Pending"],
+        default: "Pending",
         required: true
     }
 });

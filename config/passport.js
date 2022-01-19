@@ -24,6 +24,12 @@ passport.use(new LocalStrategy({
 // Middleware that redirects unauthenticated requests
 passport.checkAuthenticated = (req, res, next) => {
     if (!req.user) {
+        if (req.xhr) {
+            return res.status(401).json({
+                status: "error",
+                message: "Unauthorized"
+            });
+        }
         return res.redirect("/employees/login");
     }
     next();

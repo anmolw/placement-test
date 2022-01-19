@@ -1,0 +1,53 @@
+<h3>Results for <%= interview.company %> - <%= interview.role %></h3>
+<form action="/interviews/<%= interview.id %>/assign_student" method="post" class="row mt-4 mb-4">
+    <!-- Student assignment form -->
+    <div class="col col-md-4">
+        <label for="student-selection" class="form-label">
+            Student
+        </label>
+        <select name="student" id="student-selection" class="form-select">
+            <% for (let student of students) { %>
+            <option value="<%= student.id %>"><%= student.name %></option>
+            <% } %>
+        </select>
+    </div>
+    <div class="col align-self-end">
+        <button type="submit" class="btn btn-primary">Assign Student</button>
+    </div>
+
+</form>
+
+<!-- Results table -->
+<table class="table table-striped text-center">
+    <thead>
+        <th>
+            Student
+        </th>
+        <th>
+            Result
+        </th>
+        <th>
+            Actions
+        </th>
+    </thead>
+    <tbody>
+        <% for (let result of results) { %>
+        <tr>
+            <td><%= result.student.name %></td>
+            <td>
+                <select class="student-status form-select w-50 mx-auto" data-result-id="<%= result.id %>">
+                    <option value="Pending" <%= (result.result === "Pending") ? "selected" : "" %>> Pending</option>
+                    <option value="Pass" <%= (result.result === "Pass") ? "selected" : "" %>>Pass</option>
+                    <option value="Fail" <%= (result.result === "Fail") ? "selected" : "" %>>Fail</option>
+                    <option value="On hold" <%= (result.result === "On hold") ? "selected" : "" %>>On hold</option>
+                    <option value="Didn't attempt" <%= (result.result === "Didn't attempt") ? "selected" : "" %>>Didn't
+                        attempt</option>
+                </select>
+            </td>
+            <td><a href="/results/<%= result.id %>/delete" class="btn btn-danger">Delete</a></td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<script src="/js/interview-results.js"></script>

@@ -4,8 +4,10 @@ const passport = require("passport");
 
 router.get("/login", employeesController.loginPage);
 router.post("/login", passport.authenticate("local", {
-    failureRedirect: "/employees/login",
-    successRedirect: "/"
+    successFlash: "Logged in successfully",
+    failureFlash: "Invalid email/password",
+    successRedirect: "/",
+    failureRedirect: "/employees/login"
 }));
 router.get('/logout', employeesController.logout);
 router.get('/register', employeesController.registerPage);

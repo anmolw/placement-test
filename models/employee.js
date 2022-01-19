@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+// Employee Schema
 const employeeSchema = mongoose.Schema({
     email: {
         type: String,
@@ -16,6 +17,7 @@ const employeeSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
+// Store passwords as hashes
 employeeSchema.pre("save", function (next) {
     if (this.isModified("password")) {
         bcrypt.hash(this.password, 10).then(hash => {

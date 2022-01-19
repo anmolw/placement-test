@@ -32,31 +32,30 @@
     <div class="mt-2 mt-lg-0 col align-self-end"><button type="submit" class="btn btn-primary">Create</button></div>
 </form>
 <!-- List of students -->
-<div id="student-list" class="row">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>College</th>
-                <th>Batch</th>
-                <th>DSA</th>
-                <th>WebD</th>
-                <th>React</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for (student of locals.students) { %>
-            <tr>
-                <td><%= student.name %></td>
-                <td><%= student.college %></td>
-                <td><%= student.batch %></td>
-                <td><%= student.scores.dsa %></td>
-                <td><%= student.scores.webd %></td>
-                <td><%= student.scores.react %></td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+<div class="row row-cols-1 row-cols-md-3">
+    <% for (student of locals.students) { %>
+    <div class="col col-md-3 mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5><%= student.name %></h5>
+                <div><%= student.batchString %></div>
+                <div><%= student.college %></div>
+                <div>DSA Score: <%= student.scores.dsa %></div>
+                <div>React Score: <%= student.scores.react %></div>
+                <div>WebD Score: <%= student.scores.webd %></div>
+                <div>Set status:
+                    <select data-student-id="<%= student.id %>">
+                        <option <%= (student.status === "Not placed") ? "selected" : "" %>>Not placed</option>
+                        <option <%= (student.status === "Placed") ? "selected" : "" %>>Placed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="/students/<%= student.id %>/delete" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 
 <script src="/js/students.js"></script>

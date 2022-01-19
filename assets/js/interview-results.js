@@ -1,32 +1,21 @@
-// Set the maximum value for the month field to the current month
 window.addEventListener("DOMContentLoaded", () => {
-    const monthField = document.getElementById("student-batch-field");
-    const currentDate = new Date(Date.now());
-    const year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    if (month < 10) {
-        month = "0" + month;
-    }
-    const maxMonth = `${year}-${month}`;
-    monthField.setAttribute("max", maxMonth);
-
     // Register an event listener to each status selection element
     // that will trigger an AJAX request on change
-    document.querySelectorAll("select").forEach((node) => {
+    document.querySelectorAll("td>select").forEach((node) => {
         node.addEventListener("change", statusListener);
     })
 });
 
-// Event listener for student status <select> elements
+// Event listener for result status <select> elements
 const statusListener = (event) => {
     const newStatus = event.target.value;
     console.log(newStatus);
-    const student = event.target.getAttribute("data-student-id");
-    updateStudentStatus(student, newStatus);
+    const result = event.target.getAttribute("data-result-id");
+    updateResultStatus(result, newStatus);
 }
 
-// Update the student's placement status using an AJAX request
-const updateStudentStatus = async (student, status) => {
+// Update the result's status using an AJAX request
+const updateResultStatus = async (result, status) => {
     const options = {
         headers: {
             "Content-Type": "application/json",
@@ -38,7 +27,7 @@ const updateStudentStatus = async (student, status) => {
         })
     }
     try {
-        const response = await fetch(`/students/${student}/update_status`, options);
+        const response = await fetch(`/results/${result}/update_status`, options);
         const json = await response.json();
         // If the response status is 200, the operation succeeded
         if (response.status == 200) {
