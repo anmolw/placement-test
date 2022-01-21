@@ -1,10 +1,56 @@
 const Result = require('../models/result');
 const Interview = require('../models/interview');
 const Student = require('../models/student');
-const json2csv = require('json2csv');
+const { Parser } = require('json2csv');
 
+// Route handler used to export result data to a CSV file
 exports.exportToCSV = async (req, res) => {
-    const results = await Result.find().populate("student company");
+    const results = await Result.find().populate("student").populate("interview");
+    const fields = [
+        {
+            label: 'ID',
+            value: 'student._id'
+        },
+        {
+            label: 'Name',
+            value: 'student.name'
+        },
+        {
+            label: 'College',
+            value: 'student.college'
+        },
+        {
+            label: 'Status',
+            value: 'student.status'
+        },
+        {
+            label: 'DSA Score',
+            value: 'student.scores.dsa'
+        },
+        {
+            label: 'WebD Score',
+            value: 'student.scores.webd'
+        },
+        {
+            label: 'React Score',
+            value: 'student.scores.react'
+        },
+        {
+            label: 'Interview date',
+            value: 'interview.date'
+        },
+        {
+            label: 'Company',
+            value: 'interview.company'
+        },
+        {
+            label: 'Result',
+            value: 'result'
+        }
+    ];
+    const parser = new Parser({ fields, quote: '' });
+    const csv = parser.parse(results);
+    res.attachment('data.csv').send(csv);
 }
 
 // Route handler used to delete a result entry

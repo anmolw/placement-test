@@ -23,7 +23,7 @@
             <div class="card-body">
                 <h4><%= interview.company %></h4>
                 <div>Role: <%= interview.role %></div>
-                <div><%= interview.date %></div>
+                <div><%= interview.friendlyDate %></div>
             </div>
             <div class="card-footer">
                 <a href="<%= `/interviews/${interview.id}/results` %>" class="btn btn-primary">Results</a>

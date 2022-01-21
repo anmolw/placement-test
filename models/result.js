@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Interview results schema
 const resultsSchema = new mongoose.Schema({
     student: {
         type: Number,

@@ -2,6 +2,7 @@ const Interview = require('../models/interview');
 const Result = require('../models/result');
 const Student = require('../models/student');
 
+// Route handler that lists all interviews
 exports.interviewsPage = async (req, res) => {
     const interviews = await Interview.find({}).populate({
         path: "results",
@@ -15,6 +16,7 @@ exports.interviewsPage = async (req, res) => {
     });
 }
 
+// Route handler used to create a new interview
 exports.create = async (req, res) => {
     try {
         const interview = await Interview.create({
@@ -29,6 +31,7 @@ exports.create = async (req, res) => {
     res.redirect("back");
 }
 
+// Route handler used to delete an interview
 exports.delete = async (req, res) => {
     try {
         const interview = await Interview.findById(req.params.id);
@@ -46,6 +49,7 @@ exports.delete = async (req, res) => {
     res.redirect("back");
 }
 
+// Route handler used to assign a student to an interview
 exports.assignStudent = async (req, res) => {
     try {
         const interview = await Interview.findById(req.params.id);
@@ -63,9 +67,10 @@ exports.assignStudent = async (req, res) => {
             student: student
         });
         req.flash("success", "Student assigned");
-        res.redirect("back");
     }
     catch (error) {
-
+        console.error("Error while assigning student to interview");
+        req.flash("An error occurred");
     }
+    res.redirect("back");
 }

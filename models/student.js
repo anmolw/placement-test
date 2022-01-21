@@ -23,6 +23,7 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // Subschema that contains student scores
     scores: {
         type: new mongoose.Schema({
             dsa: {

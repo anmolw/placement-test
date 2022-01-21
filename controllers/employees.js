@@ -8,6 +8,7 @@ exports.register = async (req, res) => {
     try {
         let employee = await Employee.findOne({ email: req.body.email });
         if (employee) {
+            req.flash("error", "An employee with that account already exists.")
             res.redirect("back");
         }
         employee = await Employee.create({
@@ -18,6 +19,7 @@ exports.register = async (req, res) => {
         res.redirect("/");
     }
     catch (error) {
+        req.flash("error", "An error occurred");
         console.error("Error while creating user");
         console.error(error);
     }
@@ -30,23 +32,13 @@ exports.loginPage = (req, res) => {
     });
 }
 
+// Route handler for the registration page
 exports.registerPage = (req, res) => {
     res.render("register", {
         title: "Register"
     });
 }
-
-exports.createSession = (req, res) => {
-    if (!req.user) {
-        req.flash("error", "Invalid username/password");
-    }
-    else {
-        req.flash("success", "Logged in succesfully");
-    }
-    res.redirect("/");
-}
-
-// Route handler 
+// Route handler used to log the current user out
 exports.logout = (req, res) => {
     req.logout();
     req.flash("success", "Logged out successfully");
